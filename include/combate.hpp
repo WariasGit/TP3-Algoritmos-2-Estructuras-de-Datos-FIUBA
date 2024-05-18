@@ -2,7 +2,6 @@
 #define AYED_TP3_1C2024_COMBATE_HPP
 
 #include <string>
-
 #include <ostream>
 
 class combate {

@@ -21,7 +21,10 @@ private:
     nodo<T>* ultimo_nodo;
     size_t cantidad_datos;
 public:
-    // Constructor.
+    /*
+    * Pre:
+    * Post: Construye una cola vacia. Primer_nodo y ultimo_nodo apuntan a a nulo.
+    * */
     cola();
 
     // Pre: -
@@ -50,43 +53,79 @@ public:
     // El operador = (asignación) está deshabilitado.
     void operator=(const cola& c) = delete;
 
-    // Destructor.
+    /*
+    * Pre:
+    * Post: Libera todos los recursos de la cola.
+    * */
     ~cola();
 };
 
 template<typename T>
 cola<T>::cola() {
-
+    primer_nodo = nullptr;
+    ultimo_nodo = nullptr;
+    cantidad_datos = 0;
 }
 
 template<typename T>
 void cola<T>::alta(T dato) {
-
+    nodo<T>* nuevo_nodo = new nodo<T>(dato);
+    if (this->vacio()){
+        primer_nodo = nuevo_nodo;
+    }
+    else{
+        ultimo_nodo->siguiente = nuevo_nodo;
+    }
+    ultimo_nodo = nuevo_nodo;
+    cantidad_datos ++;
 }
 
 template<typename T>
 T cola<T>::primero() {
-
+    if (this->vacio()){
+        throw cola_exception();
+    }
+    else {
+        return primer_nodo->dato;
+    }
 }
 
 template<typename T>
 T cola<T>::baja() {
-
+    if (this->vacio()){
+        throw cola_exception();
+    }
+    else{
+        nodo<T>* nodo_auxiliar = primer_nodo;
+        T dato_a_eliminar = nodo_auxiliar->dato;
+        if (this->tamanio() == 1){
+            primer_nodo = nullptr;
+            ultimo_nodo = nullptr;
+        }
+        else{
+            primer_nodo = nodo_auxiliar->siguiente;
+        }
+        delete nodo_auxiliar;
+        cantidad_datos --;
+        return dato_a_eliminar;
+    }
 }
 
 template<typename T>
 size_t cola<T>::tamanio() {
-
+    return cantidad_datos;
 }
 
 template<typename T>
 bool cola<T>::vacio() {
-
+    return cantidad_datos == 0;
 }
 
 template<typename T>
 cola<T>::~cola() {
-
+    while (!vacio()){
+        baja();
+    }
 }
 
 #endif

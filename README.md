@@ -5,7 +5,7 @@
    <img src="Banner.jpg" alt="TP3: Quality of Life"><br>
 </p>
 
-### Estudiante: APELLIDO, NOMBRE - PADRÓN
+### Estudiante: ARIAS WALTER FEDERICO - 106428
 
 El proyecto se puede compilar manualmente por terminal con la siguiente línea:
 

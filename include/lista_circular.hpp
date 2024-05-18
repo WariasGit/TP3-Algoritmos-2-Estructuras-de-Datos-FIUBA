@@ -18,11 +18,13 @@ template<typename T>
 class lista_circular {
 private:
     nodo<T>* primer_nodo;
-    // El cursor es el elemento actual.
-    nodo<T>* cursor;
+    nodo<T>* cursor;  // El cursor es el elemento actual.
     size_t cantidad_datos;
 public:
-    // Constructor.
+    /*
+    * Pre: 
+    * Post: Construye una lista vacia. Primer_nodo y cursor apuntan a nullptr.
+    * */
     lista_circular();
 
     // Pre: -
@@ -96,47 +98,91 @@ public:
 
 template<typename T>
 lista_circular<T>::lista_circular() {
-
+    cantidad_datos = 0;
+    primer_nodo = nullptr;
+    cursor = nullptr;
 }
 
 template<typename T>
 void lista_circular<T>::alta(T dato) {
-
+    if(this->vacio()){
+        nodo<T>* nuevo_nodo = new nodo<T>(dato);
+        primer_nodo = nuevo_nodo;
+        primer_nodo->anterior = nuevo_nodo;
+        primer_nodo->siguiente = nuevo_nodo;
+        cursor = nuevo_nodo;
+    }
+    else{
+        nodo<T>* nuevo_nodo = new nodo<T>(dato, cursor->anterior, cursor);
+        cursor->anterior->siguiente = nuevo_nodo;
+        cursor->anterior = nuevo_nodo;
+    }
+    cantidad_datos ++;
 }
 
 template<typename T>
 T lista_circular<T>::actual() {
-
+    if (this->vacio()){
+        throw lista_circular_exception();
+    }
+    else{
+        return cursor->dato;
+    }
 }
 
 template<typename T>
 T lista_circular<T>::baja() {
+    if (this->vacio()){
+        throw lista_circular_exception();
+    }
+    else{
+        nodo<T>* nodo_auxiliar = cursor;
+        T dato_a_eliminar = cursor->dato;
+        if (cantidad_datos == 1){
+            primer_nodo = nullptr;
+            cursor = nullptr;
+        }
+        else{
+        cursor->anterior->siguiente = cursor->siguiente;
+        cursor->siguiente->anterior = cursor->anterior;
+        this->avanzar();
+        }
+        cantidad_datos --;
+        delete nodo_auxiliar;
+        return dato_a_eliminar;
 
+    }
 }
 
 template<typename T>
 void lista_circular<T>::avanzar() {
-
+    if (!vacio()){
+        cursor = cursor->siguiente;
+    }
 }
 
 template<typename T>
 void lista_circular<T>::retroceder() {
-
+    if (!vacio()){
+        cursor = cursor->anterior;
+    }
 }
 
 template<typename T>
 size_t lista_circular<T>::tamanio() {
-
+    return cantidad_datos;
 }
 
 template<typename T>
 bool lista_circular<T>::vacio() {
-
+    return cantidad_datos == 0;
 }
 
 template<typename T>
 lista_circular<T>::~lista_circular() {
-
+    while (!vacio()){
+        baja();
+    }
 }
 
 #endif
