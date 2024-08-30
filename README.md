@@ -1,17 +1,13 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Z4l11-L-)
 # AyED / AYP2 - TP3 1c2024
+
+### Estudiante: ARIAS WALTER FEDERICO - 106428
 
 <p align="center">
    <img src="Banner.jpg" alt="TP3: Quality of Life"><br>
 </p>
 
-### Estudiante: ARIAS WALTER FEDERICO - 106428
 
-El proyecto se puede compilar manualmente por terminal con la siguiente línea:
-
-> // COMPLETAR CON LINEA DE COMPILACIÓN //
-
-O, alternativamente, con CMake, utilizando el archivo **CMakeLists.txt** presente en el directorio raíz.
+El proyecto se puede compilar con CMake, utilizando el archivo **CMakeLists.txt** presente en el directorio raíz.
 
 Para distribuciones de Linux, se pueden utilizar los scripts presentes en el directorio raíz para compilar y ejecutar
 la suite de tests. Requiere:
@@ -23,7 +19,3 @@ la suite de tests. Requiere:
 Que se pueden instalar por terminal:
 
 > sudo apt-get install // PROGRAMA //
-
-# Aclaraciones adicionales:
-
-// ACLARACIONES ADICIONALES PARA EL CORRECTOR, COMO DECISIONES O SUPUESTOS QUE CONSIDERARON //
